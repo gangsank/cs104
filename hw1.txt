@@ -1,0 +1,27 @@
+Problem 1
+Part (a) : 1,4,
+Part (b) : 4,2,3
+Part (c) : 2,3,4,5
+Part (d) : 2
+Part (e) : 2,3,4,5
+
+Problem 2
+Part (a) : 2
+Part (b) : 1,2
+Part (c) :  (1) - git add hw1q2b.cpp
+			(2) - git log -p -3
+Part (d) : GIt will commit the staged three files and make them part of repository history.
+Part (e) : git clone git@github.com:gangsank/cs104.git
+
+Problem 4
+1.  1
+	2
+	3
+	4
+	5
+As the recursion goes, the min value becomes equal to the max value from 0 to 4 in each recursion, so it will print out all values in the arry, one per line.
+
+2. when min value is bigger than max value, funcB will fail to terminate. For input values when min is smaller than max, funcB will always terminate because as the recursion keeps going on, the min becomes equal to the max value.
+
+3. funcB(a, min, max) outputs all the values of array a from index min to index max.
+
