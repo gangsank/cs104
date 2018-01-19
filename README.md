@@ -1,5 +1,5 @@
 # CS 104 Student Repository
 
-- **Name**: Tommy Trojan
-- **USC ID**: 1234567890
-- **Email**: ttrojan@usc.edu
+- **Name**: Gangsan Keum
+- **USC ID**: 6559652882
+- **Email**: gangsank@usc.edu
