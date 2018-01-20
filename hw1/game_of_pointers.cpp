@@ -271,7 +271,8 @@ int main(int argc, char* argv[])
         input >> skirmish_row;
         
         //In general, it is bad style to throw everything into your main function
-        bool end = skirmish(protectors, invaders, skirmish_row, rows, cols, reserve, output);
+        bool end = skirmish(protectors, invaders, skirmish_row, 
+            rows, cols, reserve, output);
         
         if (end)
         {
