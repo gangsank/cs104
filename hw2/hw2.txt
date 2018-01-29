@@ -1,0 +1,9 @@
+Problem 1
+(a) : Untracked
+(b) : Untracked
+(c) : Staged
+(d) : Modified
+(e) : Staged for README.md and Unmodified for fun_problem.txt
+(f) : Modified
+
+Problem 3
