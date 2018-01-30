@@ -7,3 +7,32 @@ Problem 1
 (f) : Modified
 
 Problem 3
+1. A list of integers from 1 to 100, since each item has a unique number,
+we will be able to access the item by if we know the index of it.
+
+2. A set of the names pf the movies in the Star Wars Universe,
+since all movies in the Star Wars Universe are distinct, the key
+can be the name of each movie.
+
+3. A map of ISBNs as the keys and book names as the values,
+since all books' ISBNs are distinct, we can use the ISBNs as the keys
+and get the book names from the ISBNs.
+
+4. A list of array of movie names. I used list here because list allows 
+duplicates and if I used the year as a key, then the key is not unique
+because there are several movies that are released in a same year.
+We can order the list by the year, from the oldest to the newest,
+and aceess the array of movies by the index.
+
+5. A map of strings that contain the season and the episode number as the keys
+and the episode names as the values.
+Since the season and the episode number are distinct, the two can be combined
+and act as a key, and we can use the key to get the name of the episode.
+
+Problem 4
+A linked list 5,4,3,2,1 is returned. When funcA is called with input linked list
+of 1,2,3,4,5, the r pointer points to 5 after the while loop and when funcB
+is recursively called it reverses the list. After all funcB recursions, the l
+pointer is pointing at 1, which is the end and l->next = nullptr sets the next
+pointer of 1 to NULL. Then, when we return the pointer r at the end, we
+return the completely reversed linked list of the input.
