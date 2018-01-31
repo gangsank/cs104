@@ -9,5 +9,5 @@ Problem 6 with my own test case should be compiled with
 g++ -g -Wall -std=c++11 lliststr.cpp lliststr_test.cpp -o 
 lliststr_test and run with ./lliststr_test
 
-Problem 7 with g++ -g -Wall -std=c++11 lliststr.cpp assassin.cpp -o 
-assassin and run with ./assassin (input file name)
+Problem 7 should be compile with g++ -g -Wall -std=c++11 lliststr.cpp 
+assassin.cpp -o assassin and run with ./assassin (input file name)

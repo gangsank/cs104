@@ -203,10 +203,11 @@
   		Item* next_item;
   		Item* prev_item;
 
-  		for (int i=1; i<pos; i++)
+  		for (int i=0; i<pos; i++)
   		{
   			temp = temp->next;
   		}
+
   		next_item = temp->next;
   		prev_item = temp->prev;
 

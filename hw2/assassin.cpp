@@ -27,10 +27,16 @@ int main (int argc, char* argv[])
 		{
 			input >> pos;
 			
-			if(pos < list->size())
+			if(pos == list->size()-1)
 			{
-			cout << "Assassinated: " << list->get(pos-1) << endl;
-			list->remove(pos-1);
+			cout << "Assassinated: " << list->get(0) << endl;
+			list->remove(0);
+			}
+
+			else if(pos < list->size()-1 && pos >=0 )
+			{
+				cout << "Assassinated: " << list->get(pos+1) << endl;
+				list->remove(pos+1);
 			}
 		}
 
