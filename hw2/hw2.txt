@@ -1,11 +1,11 @@
 Problem 1
-(a) : Untracked
-(b) : Untracked for both
-(c) : Staged
+(a) : Unmodified
+(b) : Untracked for fun_problem.txt and modified for README.md
+(c) : Staged for both
 (d) : Modified for both
 (e) : Staged for README.md and Unmodified for fun_problem.txt.
-		Now the content of fun_problem.txt is back to when it
-		was inititally committed.
+		Now the content of fun_problem.txt is empty because of
+		git checkout --filename which removes all previous changes
 (f) : Modified because you add a line into README.md, 
 		thus modifying the file.
 
