@@ -31,7 +31,8 @@ void checkSize(LListStr *list, int expSize) {
 void checkGet(LListStr *list, int pos, const string &expStr) {
     string str = list->get(pos);
     if (str == expStr) {
-        cout << "SUCCESS: String at index " << pos << " is \'" << expStr << "\'" << endl;
+        cout << "SUCCESS: String at index " << pos << " is \'" 
+        << expStr << "\'" << endl;
     } 
     else {
         cout << "FAIL: String at index " << pos << " is \'" << str << "\'";
