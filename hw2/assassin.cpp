@@ -33,6 +33,18 @@ int main (int argc, char* argv[])
 			list->remove(pos-1);
 			}
 		}
+
+		else if (command == "REPLACE")
+		{
+			input >> pos;
+			input >> str;
+			list->set(pos, str);
+		}
+
+		else
+		{
+			getline(input, str);
+		}
 	}
 
 	if(list->size() == 1)
