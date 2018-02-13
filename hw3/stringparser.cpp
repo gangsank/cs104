@@ -16,13 +16,13 @@ string operator+ (const string& lhs, const string& rhs)
 string operator- (string lhs, string rhs)
 {
 	string sub;
-	int len = rhs.length();
+	int len = (int)rhs.length();
 
 	for (int i=0; i<len; i++)
 	{
 		sub = rhs.substr(i,len-i);
 
-		int found = lhs.find(sub);
+		int found = (int)lhs.find(sub);
 
 		if(found>=0)
 		{
@@ -67,6 +67,7 @@ string Computation (string s)
 
 	bool plus = false;
 	bool minus = false;
+	int minuscount = 0;
 
 	for (unsigned int i=0; i<s.length(); i++)
 	{
@@ -78,7 +79,13 @@ string Computation (string s)
 		else if (s[i]=='-')
 		{
 			minus = true;
+			minuscount++;
 		}
+	}
+
+	if (minuscount > 1)
+	{
+		return "";
 	}
 
 	if (plus && minus)

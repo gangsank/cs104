@@ -14,15 +14,15 @@ runtime of Θ(n-i). Then, both loop (Θ(n-i)) runs from i=0 to
 i=n-1, so that makes each loop with a runtime of Θ(n^2) according
 to the arithmetic sum. Since we have two separate blocks of code,
 we add them up to get the total runtime which is Θ(n^2)+Θ(n^2)
-= Θ(n^2). The while loop gets never run because the stack is empty
-when it gets to the while loop.
+= Θ(n^2). The while loop gets never run because the stack 
+always is empty when it gets to the while loop.
 
 (b)
 Answer : Θ(n^2)
 
 Explanation : When you draw the recursion tree,
 you can see that the recursion makes (n-1)+(n-2)+(n-3)+...
-+1, which is equal to the arithmetic sum of n.
++1 function calls, which is equal to the arithmetic sum of n.
 Therefore, it is equal to Θ(n^2).
 
 (c)
@@ -30,11 +30,11 @@ Answer : Θ(n)
 
 Explanation : The first for loop runs in Θ(n) because 
 it iterates from i=1 to i=n. Then, when we enter the
-while loop, we see a for loop in an if statement.
+while loop, we see a for loop inside an if statement.
 By tracing the code, we can find out that the if(q.front()==1)
 is true only once, therefore the inside for loop will be run
-only once. The while loops n times through the queue, so adding
-all three blocks of code, we get n+n+n=3n, which is Θ(n).
+only once. The while loop runs n times through the queue, 
+so adding all three blocks of code, we get n+n+n=3n, which is Θ(n).
 
 
 (d)
@@ -59,19 +59,19 @@ case.
 
 If we assume that all values in arr are not 0s, then
 the innermost for loop will be never run, therefore
-the runtime of the second big for loop becomes Θ(n^2).
+the runtime of the second for loop becomes Θ(n^2).
 Adding the blocks of code, we still get Θ(n^2), which 
 is the best case.
 
 Since the big oh and the big omega are different,
-we cannot determine the big thetat for this code.
+we cannot determine the big theta for this code.
 
 Problem 3
 (a)
 Answer : Θ(n^2logn)
 
 Explanation : The worst case sequence of n somefunc calls
-starts with when n=0 and max=1. Bar takes Θ(n^2) and
+starts when n=0 and max=1. Bar takes Θ(n^2) and
 foo takes Θ(logn) time. For n sequences, foo runs from
 i=1 to i=n-logn, so its total runtime becomes
 logn*(n-logn) = nlogn-(logn)^2. Then, Bar runs from
