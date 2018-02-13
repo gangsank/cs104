@@ -38,10 +38,7 @@ so adding all three blocks of code, we get n+n+n=3n, which is Θ(n).
 
 
 (d)
-Answer : Big theta does not exist because the Big O 
-and the Big omega is different.
-Big Oh is n^2logn
-Big Omega is n^2
+Answer : Θ(n^2logn)
 
 Explanation :The first for loop is inserting a 
 node at the front of a linked list from i=0 to i=n-1, 
@@ -54,17 +51,7 @@ n
 i=1
 Doing the sigma notation, we find out that
 the runtime of the innermost for loop is logn. Calculating
-the outer while and for loop we get, n^2logn for the worst
-case.
-
-If we assume that all values in arr are not 0s, then
-the innermost for loop will be never run, therefore
-the runtime of the second for loop becomes Θ(n^2).
-Adding the blocks of code, we still get Θ(n^2), which 
-is the best case.
-
-Since the big oh and the big omega are different,
-we cannot determine the big theta for this code.
+the outer while and for loop we get, n^2logn.
 
 Problem 3
 (a)
