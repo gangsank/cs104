@@ -59,7 +59,7 @@ void deletion (char operation, string& s)
 
 string Computation (string s)
 {
-
+	//If a plus or a minus is in front of the parenthesis, stop.
 	if(s[0]=='+' || s[0]=='-')
 	{
 		return "";
@@ -83,11 +83,13 @@ string Computation (string s)
 		}
 	}
 
+	//If there is more than one minus operation, stop.
 	if (minuscount > 1)
 	{
 		return "";
 	}
 
+	//If a plus and a minus are in a parenthesis together, stop.
 	if (plus && minus)
 	{
 		return "";
@@ -96,6 +98,7 @@ string Computation (string s)
 	StackStr stack;
 	char oper;
 
+	//Compute
 	for (unsigned int i=0; i<s.length(); i++)
 	{
 		if((s[i] >= 'a' && s[i] <= 'z'))
@@ -104,6 +107,7 @@ string Computation (string s)
         	temp += s[i];
         	int curr = i+1;
 
+        	//Extracting a string
         	while (curr<(int)s.length() && (s[curr] >= 'a' 
         		&& s[curr] <= 'z'))
         	{
@@ -113,6 +117,7 @@ string Computation (string s)
 
         	int temp1 = i-1;
 
+        	//Do the '<' or '>' in front of the string
         	while ((s[temp1]=='<' || s[temp1]== '>')&&
         			temp1>=0)
         	{
@@ -123,6 +128,8 @@ string Computation (string s)
         	stack.push(temp);
         }
  
+ 		//If the stack has two operands and the char has
+ 		//an operation, do the computation.
         if (stack.size()==2&&oper)
         {
         	string second = stack.top();
@@ -141,17 +148,20 @@ string Computation (string s)
         	stack.push(third);
         }
 
+        //When operation is a plus
         if(s[i]=='+')
         {
         	oper = s[i];
         }
 
+        //When operation is a minus
         else if (s[i]=='-')
         {
         	oper = s[i];
         }
     }
 	
+	//Return the top of this stack back to the original stack.
 	string result = stack.top();
 	stack.pop();
 
@@ -164,7 +174,7 @@ string Eval(string s)
 
     for(int i = 0; i < (int)s.length(); i++)
     {
-        // If the scanned string is an operand, add it to output string.
+        // If scanned a string, add to the stack.
      	if((s[i] >= 'a' && s[i] <= 'z'))
         {
         	string temp;
@@ -189,6 +199,7 @@ string Eval(string s)
         	stack.push(temp);
         }
 
+        //If a blank space is scanned, skip.
        	else if (s[i]==' ')
        	{
        		continue;
@@ -221,6 +232,7 @@ string Eval(string s)
                 stack.pop();
             }
 
+            //Extracting everything in the parenthesis.
             string a;
             while(!tempstack.empty())
             {
@@ -235,6 +247,7 @@ string Eval(string s)
             	return "";
             }
 
+            //Push the computation result to the stack.
             stack.push(middle);
         }
          
@@ -246,11 +259,10 @@ string Eval(string s)
         }
     }
 
-    //Print out the result
-    //If the stack contains something else, terminate.
     string result = stack.top();
     stack.pop();
 
+    //Checking for extra operations.
     while (stack.top()==">" || stack.top()=="<")
     {
     	char op = (stack.top())[0];
@@ -258,11 +270,13 @@ string Eval(string s)
     	stack.pop();
     }
 
+    //If stack is not empty after doing the computations,stop.
     if(!stack.empty())
     {
     	return"";
     }
 	
+	//If everything is correct, return the result.
     return result;
 } 
 
@@ -286,15 +300,19 @@ int main (int argc, char* argv[])
 
 	string buffer;
 
+	//Reading each line of the input
 	while(getline(ifile,buffer))
 	{
 		bool malformed = false;
+
+		//If the line is empty, stop.
 		if(buffer=="")
 		{
 			ofile << "Malformed" << endl;
 			continue;
 		}
 	
+		//if the line contains a capital letter, stop.
 		for (int i=0; i<(int)buffer.length(); i++)
 		{
 			if(((buffer[i]>='A'&&buffer[i]<='Z')))
@@ -308,10 +326,13 @@ int main (int argc, char* argv[])
 		if(!malformed)
 		{
 			string result = Eval(buffer);
+
+			//If Malformed
 			if(result=="")
 			{
 				ofile << "Malformed" << endl;
 			}
+			//If string expression is correct
 			else
 			{
 			ofile << result << endl;
