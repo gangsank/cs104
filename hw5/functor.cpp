@@ -1,6 +1,6 @@
 #include "functor.h"
 
-bool functor::NumStrComp::operator()(const string& lhs, const string& rhs)
+bool NumStrComp::operator()(const string& lhs, const string& rhs)
 {
 	if(lhs==rhs)
 	{

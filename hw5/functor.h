@@ -6,12 +6,9 @@
 
 using namespace std;
 
-class functor
+class NumStrComp
 {
 	public:
-		struct NumStrComp
-		{
-			bool operator()(const string& lhs, const string& rhs);
-		};
+		bool operator()(const string& lhs, const string& rhs);
 };
 #endif
