@@ -47,6 +47,8 @@
   		{
   			return last;
   		}
+
+      return middle;
   	}
 
   	//Partitioning the vector
@@ -91,6 +93,6 @@
   	void QuickSort (std::vector<T> &myArray, Comparator comp)
   	{
   		int start = 0;
-  		int end = (int)myArray.size()-1;
+  		int end = static_cast<int>(myArray.size()-1); 
   		quicksort(myArray,start,end,comp);
   	}
