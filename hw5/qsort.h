@@ -4,7 +4,7 @@
   	template<class T>
   	void swap(std::vector<T> &myArray, int first, int second)
   	{
-  		int temp = myArray[first];
+  		T temp = myArray[first];
   		myArray[first] = myArray[second];
   		myArray[second] = temp;
   	}
@@ -60,7 +60,7 @@
   		int pivot = findMedian(myArray,start,end);
   		swap(myArray,pivot,end);
 
-  		int pivotvalue = myArray[end];
+  		T pivotvalue = myArray[end];
   		int pivotindex = start;
 
   		for (int i=start; i<end; i++)
