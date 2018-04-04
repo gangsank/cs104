@@ -105,6 +105,7 @@ void WebPage::parse(const vector<WebPage*> webPages)
         		link += raw[i];
       		}
       		link.erase(link.end()-1);
+      		bool found = false;
 			
 			for (unsigned int j=0; j<webPages.size(); j++)
 			{
@@ -113,9 +114,17 @@ void WebPage::parse(const vector<WebPage*> webPages)
 					WebPage* temp = webPages[j];
 					temp->add_inLink(this);
 					this->add_outLink(temp);
+					found = true;
 				}
 			}
 			
+			if(!found)
+			{
+				const char* clink = link.c_str();
+				WebPage* temp = new WebPage(clink);
+				this->add_outLink(temp);
+			}
+
 			link.clear();
 		}
 	}

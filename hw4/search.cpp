@@ -245,6 +245,21 @@ int main(int argc, char* argv[])
 
 	//Delete allocated memories
 	for (unsigned int i=0; i<webPages.size(); i++)
+	{	
+		set<WebPage*> links;
+		links = webPages[i]->get_outLinks();
+		set<WebPage*>:: iterator it;
+
+		for(it=links.begin(); it != links.end(); ++it)
+		{
+			if ((*it)->get_raw() == "")
+			{
+				delete *it;
+			}
+		}
+	}
+
+	for (unsigned int i=0; i<webPages.size(); i++)
 	{
 		delete webPages[i];
 	}
