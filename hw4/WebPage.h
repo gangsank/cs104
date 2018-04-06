@@ -9,6 +9,7 @@
 #include <cctype>
 #include <map>
 #include <vector>
+#include <utility>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class WebPage
 	public:
 		WebPage();
 		WebPage(string name);
+		WebPage(const char* link);
 		~WebPage();
 		void print_content(ofstream&);
 		void parse(const vector<WebPage*>);
@@ -31,7 +33,7 @@ class WebPage
 
 	private:
 		string filename;
-		string raw;
+		string raw="";
 		set<string> content;
 		set<WebPage*> inLinks;
 		set<WebPage*> outLinks;

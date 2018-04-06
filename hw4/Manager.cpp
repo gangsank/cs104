@@ -7,53 +7,62 @@ Manager::Manager()
 
 Manager::Manager(vector<WebPage*> webs) : webPages(webs)
 {
+	//storing the strings and the according set of webpages into a map
+	for (unsigned int i=0; i<webPages.size(); i++)
+	{
+		set<string> content = webPages[i]->get_content();
+		set<string> lowercontent;
+		set<string>:: iterator it;
 
+		for (it = content.begin(); it != content.end(); ++it)
+		{
+			string lower="";
+
+			for(unsigned int j=0; j<(*it).size(); j++)
+			{
+				lower += tolower((*it)[j]);
+			}
+
+			lowercontent.insert(lower);
+		}
+
+		for (it = lowercontent.begin(); it != lowercontent.end(); ++it)
+		{
+			map<string, set<WebPage*> >::iterator iter=maps.find(*it);
+
+			if(iter == maps.end())
+			{ 
+			set<WebPage*> temp;
+			temp.insert(webPages[i]);
+			pair<string,set<WebPage*> > ret;
+			ret = make_pair(*it, temp);
+			maps.insert(ret);
+			}
+
+			else
+			{
+				(iter->second).insert(webPages[i]);
+			}
+		}
+	}
 }
 
 set<WebPage*> Manager::do_search(string word)
 {
 	set<WebPage*> result;
 	string newword="";
+
 	for (unsigned int i=0; i<word.size(); i++)
 	{
 		newword += tolower(word[i]);
 	}
 
-	for (unsigned int i=0; i<webPages.size(); i++)
+	map<string, set<WebPage*> >::iterator it;
+	it = maps.find(newword);
+
+	if(it != maps.end())
 	{
-		bool found = false;
-		set<string> content = webPages[i]->get_content();
-		set<string> real;
-
-		set<string>::iterator it1;
-
-		for (it1 = content.begin(); it1 != content.end(); ++it1)
-		{
-			string lower="";
-			for(unsigned int j=0; j<(*it1).size(); j++)
-			{
-				lower += tolower((*it1)[j]);
-			}
-
-			
-			real.insert(lower);
-		}
-
-		set<string>::iterator it2;
-
-		for (it2 = real.begin(); it2 != real.end(); ++it2)
-		{
-			if (*it2 == newword)
-			{
-				found = true;
-				break;
-			}
-		}
-
-		if(found)
-		{
-			result.insert(webPages[i]);
-		}
+	result = it->second;
 	}
 
 	return result;

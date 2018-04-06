@@ -14,7 +14,16 @@ WebPage::WebPage(string name) : filename(name)
 	while(getline(ifile,buffer))
 	{
 		raw+=buffer;
+		raw+=" ";
 	}
+}
+
+//This constructor is strictly for
+//hyperlinks that are not in index file
+WebPage::WebPage(const char* link)
+{
+	string s(link);
+	filename = s;
 }
 
 //Destructor
@@ -43,7 +52,7 @@ void WebPage::print_content(ofstream &output)
 	{
 		int i=0;
 
-		while (i <(int)buffer.size())
+		while (i<(int)buffer.size())
 		{
 			if(buffer[i]=='(')
 			{
@@ -53,6 +62,12 @@ void WebPage::print_content(ofstream &output)
 				}
 				i++;
 			}
+			
+			if(i==(int)buffer.size())
+			{
+				break;
+			}
+
 			output << buffer[i];
 			i++;
 		}
@@ -76,7 +91,8 @@ void WebPage::parse(const vector<WebPage*> webPages)
 
     	else if (!isalnum(raw[i]) && raw[i] == '[')
     	{
-    		word+=raw[i];
+    		//word+=raw[i];
+    		continue;
     	}
 
     	else if(!isalnum(raw[i]) && raw[i] !=']' && word !="")
@@ -87,7 +103,7 @@ void WebPage::parse(const vector<WebPage*> webPages)
 
     	else if(!isalnum(raw[i]) && raw[i] == ']')
     	{
-    		word+=raw[i];
+    		//word+=raw[i];
     		content.insert(word);
     		word.clear();
     	}
@@ -105,6 +121,7 @@ void WebPage::parse(const vector<WebPage*> webPages)
         		link += raw[i];
       		}
       		link.erase(link.end()-1);
+      		bool found = false;
 			
 			for (unsigned int j=0; j<webPages.size(); j++)
 			{
@@ -113,9 +130,17 @@ void WebPage::parse(const vector<WebPage*> webPages)
 					WebPage* temp = webPages[j];
 					temp->add_inLink(this);
 					this->add_outLink(temp);
+					found = true;
 				}
 			}
 			
+			if(!found)
+			{
+				const char* clink = link.c_str();
+				WebPage* temp = new WebPage(clink);
+				this->add_outLink(temp);
+			}
+
 			link.clear();
 		}
 	}
