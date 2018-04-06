@@ -15,6 +15,7 @@ set<WebPage*> candidates (set<WebPage*>& original)
 	for (it = original.begin(); it != original.end(); ++it)
 	{
 		candidates.insert(*it);
+		
 
 		set<WebPage*> inLinks;
 		set<WebPage*> outLinks;

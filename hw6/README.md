@@ -17,5 +17,5 @@ For problem 3, to compile cralwer, type make crawler
 
 For problem 4, a function called candidates within search.cpp file does it.
 
-For problem 5, to compile, type make search
+For problem 5, to compile, type make search.
 

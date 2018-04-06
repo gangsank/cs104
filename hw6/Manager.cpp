@@ -36,6 +36,7 @@ Manager::Manager(vector<WebPage*> webs) : webPages(webs)
 			temp.insert(webPages[i]);
 			pair<string,set<WebPage*> > ret;
 			ret = make_pair(*it, temp);
+			
 			maps.insert(ret);
 			}
 

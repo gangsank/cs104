@@ -1,4 +1,5 @@
 CXX = g++
+
 CPPFLAGS = -g -Wall -std=c++11
 
 WebPage.o : WebPage.h WebPage.cpp

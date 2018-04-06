@@ -18,6 +18,7 @@ void dfs (vector<WebPage*>& webPages, ofstream& output)
 	while(!webs.empty())
 	{
 		WebPage* temp = webs.back();
+		
 		webs.pop_back();
 		mystack.push(temp);
 	}

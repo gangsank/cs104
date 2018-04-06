@@ -15,6 +15,7 @@ std::set<T> intersectSet(std::set<T> result1, std::set<T> result2)
 			{
 				intersect.insert(*it1);
 			}
+			
 		}
 	}
 

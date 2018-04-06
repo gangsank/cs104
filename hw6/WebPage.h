@@ -36,6 +36,7 @@ class WebPage
 		void set_unvisited();
 		bool get_visited();
 		double get_rank();
+		
 		void set_rank(double num);
 
 	private:

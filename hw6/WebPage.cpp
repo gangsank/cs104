@@ -213,6 +213,5 @@ int WebPage::get_inLinksSize()
 int WebPage::get_outLinksSize()
 {
 	int size = outLinks.size();
-
 	return size;
 }
