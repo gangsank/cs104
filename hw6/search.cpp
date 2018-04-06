@@ -4,7 +4,6 @@
 #include <sstream>
 #include <queue>
 #include <stack>
-
 using namespace std;
 
 set<WebPage*> candidates (set<WebPage*>& original)
@@ -15,7 +14,6 @@ set<WebPage*> candidates (set<WebPage*>& original)
 	for (it = original.begin(); it != original.end(); ++it)
 	{
 		candidates.insert(*it);
-		
 
 		set<WebPage*> inLinks;
 		set<WebPage*> outLinks;
@@ -47,7 +45,7 @@ double p(WebPage* web, double probability, int size)
 	set<WebPage*> incoming = web->get_inLinks();
 	set<WebPage*>::iterator it;
 
-	//Let's do some math
+	//Computation for the ranks
 	for(it = incoming.begin(); it != incoming.end(); ++it)
 	{
 		int num = (*it)->get_outLinksSize();
@@ -88,7 +86,6 @@ map<double,WebPage*> PageRank (set<WebPage*>& candidates, double probability, in
 			double r = oldranks.front();
 			oldranks.pop();
 			(*it)->set_rank(r);
-			//cout << (*it)->get_filename() << " " << (*it)->get_rank() << endl;
 		}
 	}
 
@@ -110,7 +107,6 @@ int main(int argc, char* argv[])
 	string query_;
 	double probability;
 	int stepnum;
-
 	ifstream config;
 
 	//if user does not provide a config file, default.
@@ -131,13 +127,11 @@ int main(int argc, char* argv[])
 	}
 
 	string buffer;
-
-	size_t infound;
-	size_t outfound;
-	size_t qfound;
-	size_t probfound;
-	size_t sfound;
-
+	size_t indexfound;
+	size_t outputfound;
+	size_t queryfound;
+	size_t probabilityfound;
+	size_t stepfound;
 	size_t commentfound;
 
 	//Extracting all necessary information from config
@@ -161,21 +155,21 @@ int main(int argc, char* argv[])
 			}
 
 			//Since order does not matter
-			infound = buffer.find("INDEX_FILE");
-			outfound = buffer.find("OUTPUT_FILE");
-			qfound = buffer.find("QUERY_FILE");
-			probfound = buffer.find("RESTART_PROBABILITY");
-			sfound = buffer.find("STEP_NUMBER");
+			indexfound = buffer.find("INDEX_FILE");
+			outputfound = buffer.find("OUTPUT_FILE");
+			queryfound = buffer.find("QUERY_FILE");
+			probabilityfound = buffer.find("RESTART_PROBABILITY");
+			stepfound = buffer.find("STEP_NUMBER");
 
 			//found index
-			if(infound != string::npos)
+			if(indexfound != string::npos)
 			{
 				//cutting out "INDEX_FILE"
-				buffer = buffer.substr(infound+10);
+				buffer = buffer.substr(indexfound+10);
 
 				//assigning the filepath
-				infound = buffer.find("=");
-				buffer = buffer.substr(infound+1);
+				indexfound = buffer.find("=");
+				buffer = buffer.substr(indexfound+1);
 
 				ss << buffer;
 				ss >> index_; 
@@ -183,13 +177,13 @@ int main(int argc, char* argv[])
 			}
 
 			//found output
-			else if (outfound != string::npos)
+			else if (outputfound != string::npos)
 			{
 				//cutting out "OUTPUT_FILE"
-				buffer = buffer.substr(outfound+11);
+				buffer = buffer.substr(outputfound+11);
 				//assigning the filepath 
-				outfound = buffer.find('=');
-				buffer = buffer.substr(outfound+1);
+				outputfound = buffer.find('=');
+				buffer = buffer.substr(outputfound+1);
 
 				ss << buffer;
 				ss >> output_;
@@ -197,13 +191,13 @@ int main(int argc, char* argv[])
 			}
 
 			//found query
-			else if (qfound != string::npos)
+			else if (queryfound != string::npos)
 			{
 				//cutting out "QUERY_FILE"
-				buffer = buffer.substr(qfound+10);
+				buffer = buffer.substr(queryfound+10);
 				//assigning the filepath 
-				qfound = buffer.find('=');
-				buffer = buffer.substr(qfound+1);
+				queryfound = buffer.find('=');
+				buffer = buffer.substr(queryfound+1);
 
 				ss << buffer;
 				ss >> query_;
@@ -212,13 +206,13 @@ int main(int argc, char* argv[])
 			}
 
 			//found probability
-			else if (probfound != string::npos)
+			else if (probabilityfound != string::npos)
 			{
 				//cutting out "RESTART_PROBABILITY"
-				buffer = buffer.substr(probfound+19);
+				buffer = buffer.substr(probabilityfound+19);
 				//assigning the filepath 
-				probfound = buffer.find('=');
-				buffer = buffer.substr(probfound+1);
+				probabilityfound = buffer.find('=');
+				buffer = buffer.substr(probabilityfound+1);
 
 				ss << buffer;
 				ss >> probability;
@@ -226,13 +220,13 @@ int main(int argc, char* argv[])
 			}
 
 			//found number of steps
-			else if (sfound != string::npos)
+			else if (stepfound != string::npos)
 			{
 				//cutting out "STEP_NUMBER"
-				buffer = buffer.substr(sfound+11);
+				buffer = buffer.substr(stepfound+11);
 				//assigning the filepath 
-				sfound = buffer.find('=');
-				buffer = buffer.substr(sfound+1);
+				stepfound = buffer.find('=');
+				buffer = buffer.substr(stepfound+1);
 
 				ss << buffer;
 				ss >> stepnum;
@@ -333,6 +327,7 @@ int main(int argc, char* argv[])
 				mystack.pop();
 				output << temp->get_filename() << endl;
 			}
+			
 		}
 
 		//OR (Union of webpages)
@@ -340,7 +335,6 @@ int main(int argc, char* argv[])
 		{
 			set<WebPage*> result1;
 			set<WebPage*> result2;
-			int count = 0;
 
 			bool targetexists = false;
 
@@ -348,7 +342,6 @@ int main(int argc, char* argv[])
 			{
 				targetexists = true;
 				result1 = manager.do_search(target); 
-				count++;
 			}
 
 			else
@@ -386,6 +379,7 @@ int main(int argc, char* argv[])
 				mystack.pop();
 				output << temp->get_filename() << endl;
 			}
+			
 		}
 
 		//PRINT page
@@ -542,7 +536,6 @@ int main(int argc, char* argv[])
 				}
 			}
 		}
-		output << endl;
 	}
 
 	//Delete allocated memories
@@ -565,4 +558,8 @@ int main(int argc, char* argv[])
 	{
 		delete webPages[i];
 	}
+
+	index.close();
+	output.close();
+	query.close();
 }
